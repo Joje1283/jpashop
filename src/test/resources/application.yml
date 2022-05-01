@@ -1,3 +1,4 @@
+# 테스트 환경에서 위한 설정이다. spring의 설정을 모두 삭제했으나, 테스트에서는 기본적으로 메모리 DB로 동작시킨다.
 #spring:
 #  datasource:
 #    url: jdbc:h2:mem:tes
@@ -6,7 +7,7 @@
 #    driver-class-name: org.h2.Driver
 #  jpa:
 #    hibernate:
-#      ddl-auto: create-drop
+#      ddl-auto: create-drop  # create-drop: 마지막으로 drop쿼리를 다 날린다.
 #    properties:
 #      hibernate:
 #        show_sql: true
