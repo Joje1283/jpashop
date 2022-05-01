@@ -34,21 +34,24 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; // 주문상태 [ORDER, CANCEL]
 
-    //==연관관계 메서드2
-//    public void setMember(Member member) {
-//        this.member = member;
-//        member.getOrders().add(this);
-//    }
-//
-//    public void addOrderItem(OrderItem orderItem) {
-//        orderItems.add(orderItem);
-//        orderItem.setOrder(this);
-//    }
-//
-//    public void setDelivery(Delivery delivery) {
-//        this.delivery = delivery;
-//        delivery.setOrder(this);
-//    }
+    //==연관관계 메서드
+    public void setMember(Member member) {
+        // 양방향 연관관계에 모두 반영한다
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        // 양방향 연관관계에 모두 반영한다
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery) {
+        // 양방향 연관관계에 모두 반영한다
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
     //==생성 메서드==//
 //    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
