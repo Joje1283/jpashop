@@ -62,19 +62,27 @@ public class ItemController {
         return "items/updateItemForm";
     }
 
+//    @PostMapping("items/{itemId}/edit")
+//    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
+//        // 방법1: merge 업데이트 사용
+//        // item 자체에 대해서 조작해서 들어올 수 있다.
+//        // 따라서 이 유저가 해당 객체에 대해서 수정할 권한이 있는지 확인하는 로직이 필요할 수 있다.
+//        Book book = new Book();
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());;
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+//
+//        itemService.saveItem(book);  // 이 코드는 merge update를 사용한다. 때문에 위에 코드중 하나라도 주석처리하면 null로 업데이트되는 데이터가 생긴다.
+//        // 실무는 항상 더 복잡하기에 ItemService에 updateItem을 구현하여 변경 감지로 필요한 데이터만 업데이트하는것이 좋다.
+//        return "redirect:/items";
+//    }
     @PostMapping("items/{itemId}/edit")
-    public String updateItem(@PathVariable String itemId, @ModelAttribute("form") BookForm form) {
-        // item 자체에 대해서 조작해서 들어올 수 있다.
-        // 따라서 이 유저가 해당 객체에 대해서 수정할 권한이 있는지 확인하는 로직이 필요할 수 있다.
-        Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());;
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
-
-        itemService.saveItem(book);
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
+        // 방법2: 변경 감지 업데이트 사용
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
         return "redirect:/items";
     }
 }
